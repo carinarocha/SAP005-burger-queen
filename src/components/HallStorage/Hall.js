@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme)=>({
         height: 0,
         paddingTop: '56.25%', // 16:9
     },
+    texfield:{
+        marginBottom: 15,
+    }
 }));
 
 function Hall() {
@@ -209,7 +212,7 @@ function Hall() {
                         component="p"
                     >
                     {/*{product.flavor}*/}
-                    {/*{product.complement}*/}
+                    {product.complement}
                     </Typography>
                     <Typography
                         variant="body2" 
@@ -251,21 +254,41 @@ function Hall() {
             </Card>
         ))}
         </Grid>
-        <TextField 
-            className={styles.root} 
+        <div>
+        <Card className={styles.root} variant="outlined">
+      <CardContent>
+        <Typography className={styles.title} color="textSecondary" gutterBottom>
+         Pode colocar textos aqui
+        </Typography>
+        <Typography variant="h5" component="h2">
+          texto
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Um boatão para qler coisa</Button>
+      </CardActions>
+    </Card>
+        </div>
+        <Grid container direction='row' justify='center'>
+        <Card className={styles.card}>
+            <CardContent>
+            <TextField className={styles.textfield}
             type="text"  
             label="Cliente: "  
+            color='secondary'
             value={nameClient} 
             onChange={(event) => setNameClient(event.target.value)} 
-        />
-        <div />
-        <TextField 
-            className={styles.root} 
-            type="number" 
-            label="Mesa: " 
-            value={table} 
-            onChange={(event) => setTable(event.target.value)}
-        />
+            />
+                <TextField className={styles.textfield}
+                    type="number" 
+                    label="Mesa: " 
+                    color='secondary'
+                    value={table} 
+                    onChange={(event) => setTable(event.target.value)}
+            />
+            </CardContent>
+        </Card>
+        </Grid>
         </Grid>
         <Grid item xs={false} sm={2} />
     </Grid>
