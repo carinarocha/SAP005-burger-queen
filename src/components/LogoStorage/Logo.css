@@ -1,0 +1,55 @@
+
+.logo-motion{
+    margin-top: -10px;
+    margin-bottom: 10px;
+    animation: rotate-logo 3s linear infinite;
+}
+@keyframes rotate-logo{
+    0% { transform: translate(0px, -100px) rotate(-90deg); }
+    20% { transform: translate(0px, -100px) rotate(90deg) ;}
+    22% { transform: translate(0, -20px) rotate(-45deg);}
+    27% { transform: translate(0, 1px);}
+    30% { transform: translate(0, -1px);}
+    32% { transform: translate(0, 0) rotate(0deg);}
+    92% { transform: translate(0, 0) rotate(0deg);}
+    99% { transform: translate(0, 20px) rotate(10deg);}
+    100% { transform: translate(0, 150px) rotate(45deg);}
+  }
+
+  @keyframes colorchange
+  {
+    1%{
+      color: #7CFC00
+    }
+    13%{
+      color: #FF1493
+    }
+    33%{
+      color: #BA55D3
+    }
+    66%{
+      color: #00F5FF
+      }
+    100%{
+      color: #FFFF00
+    }
+  }
+
+#pao{
+    animation-name: rotate-topbun;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-
+}
+
+@keyframes rotate-topbun{
+    0% { transform: translate(0px, -100px) rotate(-90deg) ; width:40px; height:7px; }
+    20% { transform: translate(0px, -100px) rotate(90deg) ; width:40px; height:7px; }
+    22% { transform: translate(0, -20px) rotate(-45deg); width:40px; height:7px; }
+    27% { transform: translate(0, 1px); width:42px; height:6px; }
+    30% { transform: translate(0, -1px); width:40px; heght:7px; }
+    32% { transform: translate(0, 0) rotate(0deg); width:40px; height:7px; }
+    92% { transform: translate(0, 0) rotate(0deg);width:40px; height:7px; }
+    99% { transform: translate(0, 20px) rotate(10deg); width:40px; height:7px; }
+    100% { transform: translate(0, 150px) rotate(45deg); width:40px; height:7px; }
+  }

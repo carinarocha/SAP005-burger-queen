@@ -6,22 +6,17 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import {Typography, TextField, IconButton} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles'
-import { findByLabelText } from '@testing-library/dom';
+import {makeStyles} from '@material-ui/core/styles';
+import {HallContainer} from './HallContainer';
 
 
 const useStyles = makeStyles((theme)=>({
-    root:{
-        background: 'linear-gradient(45deg,#333, #999)',
-        border: 0,
-        borderRadius: 5,
-    },
     toolbar:{
         justifyContent: 'space-between',
-        background: '#242424b2',
+        backgroundColor:  '#1C1C1C'
     },
     card:{
-        width: 345,
+        width: 355,
         textAlign: 'center',
         margin: 10,
     },
@@ -31,7 +26,14 @@ const useStyles = makeStyles((theme)=>({
     },
     texfield:{
         marginBottom: 15,
+    },
+    iconButton:{
+        marginLeft: -10,
+    },
+    button:{
+        color:'white',
     }
+
 }));
 
 function Hall() {
@@ -167,14 +169,15 @@ function Hall() {
     }
 
     return (
-        <Grid container direction='column'>
-            <Grid item>
+        <HallContainer>
                 <AppBar position='static'>
                     <Toolbar className={styles.toolbar}>
-                        <Button onClick={ ()=> setMenu (cafe) } >
+                        <Button onClick={ ()=> setMenu (cafe) }
+                        className={styles.button}>
                             Café da manhã 
                         </Button>
-                        <Button onClick={ ()=> setMenu (menuAllDay) }>
+                        <Button onClick={ ()=> setMenu (menuAllDay) }
+                        className={styles.button}>
                             Resto do dia 
                         </Button>
                         <Button 
@@ -187,9 +190,6 @@ function Hall() {
                         </Button>
                     </Toolbar>
                 </AppBar>
-            </Grid>
-        <Grid item xs={false} sm={2} />
-        <Grid item xs={12} sm={9}>
         <Grid container direction='row' justify='center'>
         {menu && menu.map(product => (
             <Card className={styles.card}>
@@ -223,15 +223,19 @@ function Hall() {
                     </Typography>
                 </CardContent>
                 {pedidos && pedidos.map((product, index) => (
-                <CardActions disableSpacing>
+                <CardActions>
                     <IconButton aria-label="add product"
+                        color='secondary'
+                        className={styles.iconButton}
                         value={product.id} 
                         onClick = { () => addQtd (index)}
                     >
                         {product.name}
                         <AddCircleOutlineIcon />
                     </IconButton>
-                    <IconButton aria-label="remove product" 
+                    <IconButton aria-label="remove product"
+                        color='secondary'
+                        className={styles.iconButton}
                         onClick = { () => removeQtd (index)}
                     >
                         <RemoveCircleOutlineIcon />
@@ -244,32 +248,8 @@ function Hall() {
                     >
                         Adicionar
                 </Button>
-                <Button 
-                    size='small'
-                    color='secondary'
-                    onClick={sendOrder}
-                >
-                    Enviar pedido 
-                </Button>
             </Card>
         ))}
-        </Grid>
-        <div>
-        <Card className={styles.root} variant="outlined">
-      <CardContent>
-        <Typography className={styles.title} color="textSecondary" gutterBottom>
-         Pode colocar textos aqui
-        </Typography>
-        <Typography variant="h5" component="h2">
-          texto
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Um boatão para qler coisa</Button>
-      </CardActions>
-    </Card>
-        </div>
-        <Grid container direction='row' justify='center'>
         <Card className={styles.card}>
             <CardContent>
             <TextField className={styles.textfield}
@@ -279,6 +259,7 @@ function Hall() {
             value={nameClient} 
             onChange={(event) => setNameClient(event.target.value)} 
             />
+            <div>
                 <TextField className={styles.textfield}
                     type="number" 
                     label="Mesa: " 
@@ -286,12 +267,18 @@ function Hall() {
                     value={table} 
                     onChange={(event) => setTable(event.target.value)}
             />
+            </div>
+            <Button 
+                    size='small'
+                    color='secondary'
+                    onClick={sendOrder}
+                >
+                    Enviar pedido 
+                </Button>
             </CardContent>
         </Card>
         </Grid>
-        </Grid>
-        <Grid item xs={false} sm={2} />
-    </Grid>
+    </HallContainer>
     )
 }
 

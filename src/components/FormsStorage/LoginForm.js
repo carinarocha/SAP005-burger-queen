@@ -4,7 +4,6 @@ import {FormsContainer} from '../FormsStorage/FormsContainer';
 import {Forms} from '../FormsStorage/Forms';
 import {Inputs} from '../FormsStorage/Inputs';
 import {FormsButton} from '../FormsStorage/FormsButtons';
-//import './LoginForm.css';
 import  {yupResolver}  from '@hookform/resolvers/yup';
 import  schema from '../ValidationStorage/ValidationLogin';
 import {useForm} from 'react-hook-form';
@@ -15,10 +14,23 @@ import RestaurantIcon from '@material-ui/icons/Restaurant';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from  '@material-ui/core/FormLabel'
 import Checkbox from '@material-ui/core/Checkbox';
-//import {Button} from './Button';
+import {makeStyles} from '@material-ui/core';
+
+const useStyles = makeStyles((theme)=>({
+    root:{
+        color: 'white',
+    },
+    icon:{
+        background: 'linear-gradient(45deg,#333, #999)',
+        borderRadius: 10,
+        padding: 2,
+    }
+}));
 
 
 export const LoginForm=()=> {
+    const styles = useStyles();
+
     const {register, handleSubmit, errors} = useForm({
         mode: 'onBlur',
         resolver: yupResolver(schema),
@@ -37,7 +49,7 @@ export const LoginForm=()=> {
     }
 
     const onSubmit=()=>{
-        alert('sucesso, baby')
+        alert('sucesso')
     }
     const data=()=>{
         fetch('https://lab-api-bq.herokuapp.com/auth', {
@@ -85,7 +97,7 @@ export const LoginForm=()=> {
                         label='Senha'
                         helperText={errors.password?.message}
                     />
-                <FormLabel 
+                <FormLabel  className={styles.root}
                 component="legend"
                 onChange={(event) => setRole(event.target.value)}
                 value={role}
@@ -94,16 +106,18 @@ export const LoginForm=()=> {
                 >
                     Local
                 </FormLabel>
-                <FormControlLabel
-                    control={<Checkbox icon={<KitchenIcon/>} 
+                <FormControlLabel className={styles.root}
+                    onChange={(event) => setRole(event.target.value)}
+                    control={<Checkbox icon={<KitchenIcon className={styles.icon}/>} 
                     checkedIcon={<KitchenIcon />} name="checkedH" />}
                     label="Cozinha"
                     value='kitchen'
                     color='secondary'
                 />
-                <FormControlLabel
-                    control={<Checkbox icon={<RestaurantIcon/>} 
-                    checkedIcon={<RestaurantIcon />} name="checkedH" />}
+                <FormControlLabel className={styles.root}
+                    onChange={(event) => setRole(event.target.value)}
+                    control={<Checkbox icon={<RestaurantIcon className={styles.icon}/>} 
+                    checkedIcon={<RestaurantIcon/>} name="checkedH" />}
                     label="Salão"
                     value='hall'
                     color='secondary'
@@ -113,106 +127,3 @@ export const LoginForm=()=> {
         </FormsContainer>
     );
 };
-
-
-
-    /*function LoginForm() {
-    const history = useHistory()
-
-    const routerHall=()=>{
-    history.push('/hall')
-    }
-    const routerKitchen=()=>{
-    history.push('/kitchen')
-    }
-
-        const {register, handleSubmit, errors} = useForm({
-        resolver: yupResolver(schema)
-    });
-
-    //const onSubmit = ({email, password}) => {
-    //console.log(`Email: ${email}, password: ${password}`);
-    //alert('Sucesso, nenem');
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
-
-    const data = {
-        "email": email,
-        "password": password,
-        "role": role,
-        "restaurant": 'subsolo'
-        };
-    
-
-    return (
-        <div className='loginForm-container'>
-            <div className='loginForm-content-wrapper'>
-            <section className='loginForm-content-logo'>
-                    <Logo />
-            <form className='loginForm-content-form' >
-                <label htmlFor='email'>Email</label>
-                <input 
-                    onChange={(event) => setEmail(event.target.value)}
-                    value={email}
-                    type='text'
-                    id='email' 
-                    name='email' 
-                    ref={register}
-                />
-                {errors.email?.message}<br />
-                <label htmlFor='password'>Senha</label>
-                <input 
-                    onChange={(event) => setPassword(event.target.value)}
-                    value={password}
-                    type='password' 
-                    id='password'
-                    name='password' 
-                    ref={register} 
-                />
-                <select 
-                    onChange={(event) => setRole(event.target.value)}
-                    value={role}
-                    name='role' 
-                    ref={register}
-                >
-                    <option value=''>Cargo</option>
-                    <option value='kitchen'>Cozinha</option>
-                    <option value='hall'>Salão</option>
-                </select>
-                {errors.password?.message}<br />
-                <input type='submit' onClick={(e) =>{
-                    e.preventDefault()
-                    fetch('https://lab-api-bq.herokuapp.com/users', {
-                    method: 'POST', // or 'PUT'
-                    headers:{
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'accept': 'application/json'
-                        },
-                    body: `email=${email}&password=${password}&role=${role}&restaurant=subsolo`
-                    })
-                    .then(response => response.json())
-                    .then(json => {
-                    console.log('Success:', json)
-                    const token = json.token    
-                    const tokenUser = localStorage.setItem("token", token)
-                    if(tokenUser!== null && json.role === "hall") {
-                    routerHall()
-                    }
-                    if(tokenUser!== null && json.role === "kitchen") {
-                    routerKitchen()
-                    }
-                    })
-                    console.log(password)
-                    console.log(email)
-                }}/>
-                <Button type='submit' buttonStyle='button-unClicked'>Entrar</Button>
-                </form>
-                </section>
-                </div>
-            </div>
-    
-        );
-    }
-        export default LoginForm; */
